@@ -327,10 +327,12 @@
       },
       methods: {
         simulate(e) {
+          var $canvas = $("#linechart-multi");
           var monthlyRate = this.simulationForm.annualInterest / 12;
           var rate = monthlyRate / 100;
           var capital = 0, capitalize = 0, amount = 0, interest = 0, total = 0, interests = 0;
           
+          $canvas.html('');
           this.simulation = [];
           var i;
           var j;
@@ -409,12 +411,8 @@
             this.summary.yield = parseFloat((interests / capital) * 100).toFixed(2);
           }
 
-         /* multiLineData.datasets.push(capitalData);
-          multiLineData.datasets.push(capitalizeData);
-          multiLineData.datasets.push(interestsData);
-*/
-          if ($("#linechart-multi").length) {
-            var multiLineCanvas = $("#linechart-multi").get(0).getContext("2d");
+          if ($canvas.length) {
+            var multiLineCanvas = $canvas.get(0).getContext("2d");
             var lineChart = new Chart(multiLineCanvas, {
               type: 'line',
               data: multiLineData,
